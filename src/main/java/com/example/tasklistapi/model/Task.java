@@ -1,11 +1,14 @@
 package com.example.tasklistapi.model;
 
+import com.example.tasklistapi.form.TaskForm;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
+
 @Entity
-public class Task {
+public class Task implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
@@ -13,6 +16,16 @@ public class Task {
     private String description;
 
     private boolean hasDone;
+
+    private Long ownerId;
+
+    public Task(TaskForm form) {
+        this.description = form.getDescription();
+    }
+
+    public Task() {
+
+    }
 
     public Long getId() {
         return id;
@@ -32,5 +45,9 @@ public class Task {
 
     public void setHasDone(boolean hasDone) {
         this.hasDone = hasDone;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
     }
 }
